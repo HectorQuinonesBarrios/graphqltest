@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { ACTIONS } from './actions';
 
-const metrics = (state = [], action: { type: string }) => {
+const metrics = (state = [], action) => {
   switch (action.type) {
     case ACTIONS.GET_METRICS:
       return state;
@@ -9,7 +9,7 @@ const metrics = (state = [], action: { type: string }) => {
   }
 };
 
-const setMetric = (state = '', action: { type: string }) => {
+const selectMetric = (state = '', action) => {
   switch (action.type) {
     case ACTIONS.GET_METRICS:
       return state;
@@ -19,7 +19,7 @@ const setMetric = (state = '', action: { type: string }) => {
 
 const rootReducer = combineReducers({
   metrics,
-  setMetric,
+  selectMetric,
 });
 
 export default rootReducer;

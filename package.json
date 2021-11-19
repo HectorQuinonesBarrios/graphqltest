@@ -23,6 +23,7 @@
     "react-use": "^17.2.4",
     "rebound": "^0.1.0",
     "redux": "^4.1.2",
+    "redux-thunk": "^2.4.0",
     "subscriptions-transport-ws": "^0.9.19"
   },
   "scripts": {

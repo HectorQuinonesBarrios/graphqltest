@@ -16,12 +16,18 @@ const styles = {
 };
 
 class TextSelector extends React.PureComponent {
+  componentDidMount = () => {
+    const { props } = this;
+    props.getMetrics();
+  };
+
   handleChange = (selection) => {
     this.setMetric(selection);
   };
 
   render() {
-    const { metrics } = this.props;
+    const { metrics, selectMetric } = this.props;
+    console.log(metrics);
     return (
       <Card style={styles.card}>
         <CardHeader title="Metric" />
@@ -30,14 +36,15 @@ class TextSelector extends React.PureComponent {
           <Select
             labelId="demo-simple-select-helper-label"
             id="demo-simple-select-helper"
-            value={setMetric}
-            onChange={this.handleChange}
+            value={selectMetric}
+            onChange={(value, newValue) => this.handleChange(value, newValue)}
             style={styles.content}
+            defaultValue=""
           >
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {metrics && metrics.map((metric) => (
+            {metrics && metrics.map && metrics.map((metric) => (
               <MenuItem value="">
                 <em>{ metric }</em>
               </MenuItem>
@@ -51,9 +58,9 @@ class TextSelector extends React.PureComponent {
 
 const mapStateToProps = (state) => state;
 
-const mapDispatchToProps = () => ({
-  getMetrics,
-  setMetric,
+const mapDispatchToProps = (dispatch) => ({
+  getMetrics: () => dispatch(getMetrics()),
+  setMetric: text => dispatch(setMetric(text)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TextSelector);

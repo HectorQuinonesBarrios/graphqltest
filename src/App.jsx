@@ -3,7 +3,6 @@ import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'react-toastify/dist/ReactToastify.css';
 import { connect } from 'react-redux';
-import State from './redux/state';
 import TextSelector from './components/TextSelector';
 import Wrapper from './components/Wrapper';
 
@@ -33,6 +32,6 @@ class App extends React.PureComponent {
     );
   }
 }
-const mapStateToProps = (state: State) => state;
+const mapStateToProps = (state) => state;
 
 export default connect(mapStateToProps)(App);

@@ -16,22 +16,23 @@ export const ACTIONS = {
   SET_METRICS: 'SET_METRICS',
 };
 
-export const getMetrics = async () => {
-  const metrics = await client
-    .query({
-      query: gql`
-        query {
-          getMetrics
-        }
-      `,
+export const getMetrics = () => (
+  async dispatch => {
+    const metrics = await client
+      .query({
+        query: gql`
+          query {
+            getMetrics
+          }
+        `,
+      });
+    dispatch({
+      type: ACTIONS.GET_METRICS,
+      state: metrics.data.getMetrics,
     });
-  return {
-    type: ACTIONS.GET_METRICS,
-    state: metrics,
-  };
-};
+  });
 
-export const setMetric = async (state: string) => ({
+export const setMetric = async (state) => ({
   type: ACTIONS.SET_METRICS,
   state,
 });
