@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux';
-import { ACTIONS } from './actions';
+
+export const ACTIONS = {
+  GET_METRICS: 'GET_METRICS',
+  SET_METRICS: 'SET_METRICS',
+  SET_DATES: 'SET_DATES',
+  GET_INFO: 'GET_INFO',
+};
 
 const metrics = (state = [], action) => {
   switch (action.type) {
@@ -17,9 +23,25 @@ const selectMetric = (state = 'None', action) => {
   }
 };
 
+const dates = (state = [null, null], action) => {
+  switch (action.type) {
+    case ACTIONS.SET_DATES:
+      return action.payload;
+    default: return state;
+  }
+};
+const info = (state = [], action) => {
+  switch (action.type) {
+    case ACTIONS.GET_INFO:
+      return action.payload;
+    default: return state;
+  }
+};
 const rootReducer = combineReducers({
   metrics,
   selectMetric,
+  dates,
+  info,
 });
 
 export default rootReducer;

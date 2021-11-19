@@ -11,7 +11,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from './components/CardHeader';
 import TextSelector from './components/TextSelector';
+import ItemList from './components/ItemList';
 import Wrapper from './components/Wrapper';
+import { setDates, getInfo } from './redux/actions';
 
 const theme = createTheme({
   palette: {
@@ -40,18 +42,19 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      dates: [null, null],
       today: moment(),
     };
   }
 
   handleChange = (newValue) => {
-    this.setState({ dates: newValue });
+    const { props } = this;
+    props.setDates(newValue);
+    props.getInfo();
   };
 
   render() {
-    const { dates, today } = this.state;
-    const { selectMetric } = this.props;
+    const { today } = this.state;
+    const { selectMetric, dates } = this.props;
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
@@ -92,6 +95,7 @@ class App extends React.PureComponent {
                   />
                 )}
               </div>
+              <ItemList />
             </CardContent>
           </Card>
         </Wrapper>
@@ -101,4 +105,9 @@ class App extends React.PureComponent {
 }
 const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  setDates: dates => dispatch(setDates(dates)),
+  getInfo: () => dispatch(getInfo()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
