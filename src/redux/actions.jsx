@@ -46,25 +46,32 @@ export const setDates = (state) => (
 export const getInfo = () => (
   async dispatch => {
     const copyStore = store.getState();
-    const info = await client
-      .query({
-        query: gql`
-          query {
-            getMultipleMeasurements(input:{
-              metricName: "${copyStore.selectMetric}"
-            }) {
-              metric,
-              measurements { 
+    if (!copyStore.dates[1]) {
+      dispatch({
+        type: ACTIONS.GET_INFO,
+        payload: [],
+      });
+    }
+    if (copyStore.dates[1]) {
+      const info = await client
+        .query({
+          query: gql`
+            query {
+              getMeasurements(input:{
+                metricName: "${copyStore.selectMetric}",
+                after: ${copyStore.dates[0].unix()},
+                before: ${copyStore.dates[1].unix()}
+              }) {
                 value,
                 at,
                 unit
-              },
+              }
             }
-          }
-        `,
+          `,
+        });
+      dispatch({
+        type: ACTIONS.GET_INFO,
+        payload: info.data.getMeasurements,
       });
-    dispatch({
-      type: ACTIONS.GET_INFO,
-      payload: info.data.getMultipleMeasurements[0].measurements,
-    });
+    }
   });

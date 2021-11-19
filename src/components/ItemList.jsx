@@ -21,8 +21,8 @@ class ItemList extends React.PureComponent {
             <TableHead>
               <TableRow>
                 <TableCell>Metric</TableCell>
-                <TableCell align="right">Value</TableCell>
-                <TableCell align="right">Time</TableCell>
+                <TableCell align="center">Value</TableCell>
+                <TableCell align="center">Time</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -34,8 +34,8 @@ class ItemList extends React.PureComponent {
                   <TableCell component="th" scope="row">
                     {selectMetric}
                   </TableCell>
-                  <TableCell align="right">{row.value}{row.unit}</TableCell>
-                  <TableCell align="right">{moment(row.at)}</TableCell>
+                  <TableCell align="center">{row.value}{row.unit}</TableCell>
+                  <TableCell align="center">{moment(row.at)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
