@@ -55,6 +55,7 @@ class App extends React.PureComponent {
   render() {
     const { today } = this.state;
     const { selectMetric, dates } = this.props;
+
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
@@ -66,7 +67,6 @@ class App extends React.PureComponent {
               <div style={styles.picker}>
                 {selectMetric !== 'None' && (
                   <DateRangePicker
-                    disablePast
                     value={dates}
                     minDate={undefined}
                     maxDate={today}
@@ -80,7 +80,7 @@ class App extends React.PureComponent {
                           inputProps={startProps.inputProps}
                           focused={startProps.focused}
                           error={startProps.error}
-                          disabled={startProps.disabled}
+                          disabled={false}
                         />
                         <Box sx={{ mx: 2 }}> to </Box>
                         <TextField
@@ -88,7 +88,7 @@ class App extends React.PureComponent {
                           inputProps={endProps.inputProps}
                           focused={endProps.focused}
                           error={endProps.error}
-                          disabled={endProps.disabled}
+                          disabled={false}
                         />
                       </>
                     )}
