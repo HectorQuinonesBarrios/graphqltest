@@ -28,11 +28,13 @@ export const getMetrics = () => (
       });
     dispatch({
       type: ACTIONS.GET_METRICS,
-      state: metrics.data.getMetrics,
+      payload: metrics.data.getMetrics,
     });
   });
 
-export const setMetric = async (state) => ({
-  type: ACTIONS.SET_METRICS,
-  state,
-});
+export const setMetric = (state) => (
+  dispatch => dispatch({
+    type: ACTIONS.SET_METRICS,
+    payload: state,
+  })
+);

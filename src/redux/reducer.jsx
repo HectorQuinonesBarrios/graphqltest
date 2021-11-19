@@ -4,15 +4,15 @@ import { ACTIONS } from './actions';
 const metrics = (state = [], action) => {
   switch (action.type) {
     case ACTIONS.GET_METRICS:
-      return state;
+      return action.payload;
     default: return state;
   }
 };
 
-const selectMetric = (state = '', action) => {
+const selectMetric = (state = 'None', action) => {
   switch (action.type) {
-    case ACTIONS.GET_METRICS:
-      return state;
+    case ACTIONS.SET_METRICS:
+      return action.payload;
     default: return state;
   }
 };
